@@ -1,4 +1,4 @@
-import {AppBar, Toolbar, IconButton, Typography, Drawer, Divider, ListItem, List, } from '@mui/material'
+import {AppBar, Toolbar, IconButton, Typography, Drawer, Divider, ListItem, List, ListItemText, ListItemIcon, Collapse, ListItemButton, } from '@mui/material'
 import React, {useState} from 'react'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -12,9 +12,36 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
+import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
+import ChatIcon from '@mui/icons-material/Chat';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
+const drawerWidth = 240
 
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
 
 const DrawerHeader = styled('div')(
   ({theme}) => (
@@ -28,6 +55,47 @@ const DrawerHeader = styled('div')(
   )
   )
 
+
+
+  const CustomDrawer = styled(Drawer, {shouldForwardProp: (prop) => prop != 'open'})(
+  ({theme, open}) => (
+    {
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+      boxSizing: 'border-box',
+      ...(open && {
+        ...openedMixin(theme),
+        '& .MuiDrawer-paper': openedMixin(theme),
+      }),
+      ...(!open && {
+        ...closedMixin(theme),
+        '& .MuiDrawer-paper': closedMixin(theme),
+      }),
+    }
+  )
+  )
+
+
+  const CustomAppBar = styled(AppBar, {shouldForwardProp: (prop) => prop != 'open'})(
+    ({theme, open}) => (
+      {
+        zIndex: theme.zIndex.drawer + 1,
+        transition: theme.transitions.create(['width', 'margin'], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        ...(open && {
+          marginLeft: drawerWidth,
+          width: `calc(100% - ${drawerWidth}px)`,
+          transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+        })
+      }
+  )
+  )
 
 
 const Header = (props) => {
@@ -48,9 +116,15 @@ const Header = (props) => {
       setOpen(!open)
     }
 
+    
+    const handleClick = () => {
+      setOpen(!open);
+    };
+
+
   return (
     <React.Fragment>
-    <AppBar>
+    <CustomAppBar open={open}>
         <Toolbar>
         <IconButton
             size="large"
@@ -121,20 +195,49 @@ const Header = (props) => {
             {dark ? <LightModeIcon/> : <DarkModeIcon/>}
           </IconButton>
         </Toolbar>
-    </AppBar>
-    <Drawer open={open} onClose = {handleClose}>
+    </CustomAppBar>
+    <CustomDrawer variant='permanent' open={open} onClose = {handleClose}>
         <DrawerHeader>
-          <IconButton>
+          <IconButton onClick={handleClose}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider/>
           <List>
+            <ListItemButton onClick={handleClick}>
+                <ListItemIcon>
+                  <FeaturedPlayListIcon/>
+                </ListItemIcon>
+                <ListItemText primary='Tasks'/>
+                {open ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+            </ListItemButton>
+            <Collapse in={open} timeout='auto' unmountOnExit>
+              <List component='div' disablePadding>
+                <ListItemButton sx={{pl: 4}}>
+                <ListItemText primary="Starred" />
+                </ListItemButton>
+                <ListItemButton sx={{pl: 4}}>
+                <ListItemText primary="Starred" />
+                </ListItemButton>
+                <ListItemButton sx={{pl: 4}}>
+                <ListItemText primary="Starred" />
+                </ListItemButton>
+              </List>
+              </Collapse>
             <ListItem button>
-
+            <ListItemIcon>
+                  <ChatIcon/>
+                </ListItemIcon>
+                <ListItemText primary='Chat'/>
+            </ListItem>
+            <ListItem button>
+            <ListItemIcon>
+                  <PersonPinIcon/>
+                </ListItemIcon>
+                <ListItemText primary='Staff'/>
             </ListItem>
           </List>
-    </Drawer>
+    </CustomDrawer>
     </React.Fragment>
   )
 }
