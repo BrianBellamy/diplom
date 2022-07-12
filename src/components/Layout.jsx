@@ -1,4 +1,4 @@
-import {AppBar, Toolbar, IconButton, Typography, Drawer, Divider, ListItem, List, ListItemText, ListItemIcon, Collapse, ListItemButton, } from '@mui/material'
+import {Paper, AppBar, Toolbar, IconButton, Typography, Drawer, Divider, ListItem, List, ListItemText, ListItemIcon, Collapse, ListItemButton, } from '@mui/material'
 import React, {useState} from 'react'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -17,6 +17,12 @@ import ChatIcon from '@mui/icons-material/Chat';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {Route, Routes } from 'react-router-dom'
+
+
+import Task from '../pages/Task';
+import Chat from '../pages/Chat';
+import Staff from '../pages/Staff';
 
 
 const drawerWidth = 240
@@ -98,7 +104,7 @@ const DrawerHeader = styled('div')(
   )
 
 
-const Header = (props) => {
+const Layout = (props) => {
     const {dark, toggleDark} = props
     const [open, setOpen] = useState (false)
 
@@ -123,7 +129,7 @@ const Header = (props) => {
 
 
   return (
-    <React.Fragment>
+    <Box sx = {{display: 'flex'}}>
     <CustomAppBar open={open}>
         <Toolbar>
         <IconButton
@@ -238,8 +244,21 @@ const Header = (props) => {
             </ListItem>
           </List>
     </CustomDrawer>
-    </React.Fragment>
+    <Box sx ={{flexGrow: 1, padding: theme.spacing(3)}}>
+      <DrawerHeader/>
+      <Paper sx={{
+        padding: theme.spacing(3)
+      }}>
+        <Routes>
+      <Route path="/" element={<Task/>}/>
+      <Route path="/chat" element={<Chat/>}/>
+      <Route path="/staff" element={<Staff/>}/>
+      </Routes>
+        </Paper>
+      
+    </Box>
+    </Box>
   )
 }
 
-export default Header
+export default Layout

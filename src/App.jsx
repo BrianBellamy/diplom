@@ -1,7 +1,7 @@
 import {CssBaseline, createTheme, ThemeProvider,  } from '@mui/material';
 import { useState } from 'react';
 
-import Header from './components/Header';
+import Header from './components/Layout.jsx';
 
 
 const darkTheme = createTheme({
