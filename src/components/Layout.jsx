@@ -12,96 +12,21 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
-import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
-import ChatIcon from '@mui/icons-material/Chat';
-import PersonPinIcon from '@mui/icons-material/PersonPin';
+
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Route, Routes } from 'react-router-dom'
-
+import { DrawerHeader, CustomAppBar, CustomDrawer } from './layout/styled';
 
 import Task from '../pages/Task';
 import Chat from '../pages/Chat';
 import Staff from '../pages/Staff';
-
-
-const drawerWidth = 240
-
-
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const DrawerHeader = styled('div')(
-  ({theme}) => (
-    {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: theme.spacing(0, 1), 
-      ...theme.mixins.toolbar
-    }
-  )
-  )
+import MainMenu from './MainMenu';
 
 
 
-  const CustomDrawer = styled(Drawer, {shouldForwardProp: (prop) => prop != 'open'})(
-  ({theme, open}) => (
-    {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-      boxSizing: 'border-box',
-      ...(open && {
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-      }),
-      ...(!open && {
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-      }),
-    }
-  )
-  )
 
 
-  const CustomAppBar = styled(AppBar, {shouldForwardProp: (prop) => prop != 'open'})(
-    ({theme, open}) => (
-      {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        ...(open && {
-          marginLeft: drawerWidth,
-          width: `calc(100% - ${drawerWidth}px)`,
-          transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        })
-      }
-  )
-  )
 
 
 const Layout = (props) => {
@@ -111,9 +36,6 @@ const Layout = (props) => {
     const theme = useTheme()
     
     
-    const handleOpen = () => {
-      setOpen(true)
-    }
     const handleClose = () => {
       setOpen(false)
     }
@@ -209,40 +131,7 @@ const Layout = (props) => {
           </IconButton>
         </DrawerHeader>
         <Divider/>
-          <List>
-            <ListItemButton onClick={handleClick}>
-                <ListItemIcon>
-                  <FeaturedPlayListIcon/>
-                </ListItemIcon>
-                <ListItemText primary='Tasks'/>
-                {open ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
-            </ListItemButton>
-            <Collapse in={open} timeout='auto' unmountOnExit>
-              <List component='div' disablePadding>
-                <ListItemButton sx={{pl: 4}}>
-                <ListItemText primary="Starred" />
-                </ListItemButton>
-                <ListItemButton sx={{pl: 4}}>
-                <ListItemText primary="Starred" />
-                </ListItemButton>
-                <ListItemButton sx={{pl: 4}}>
-                <ListItemText primary="Starred" />
-                </ListItemButton>
-              </List>
-              </Collapse>
-            <ListItem button>
-            <ListItemIcon>
-                  <ChatIcon/>
-                </ListItemIcon>
-                <ListItemText primary='Chat'/>
-            </ListItem>
-            <ListItem button>
-            <ListItemIcon>
-                  <PersonPinIcon/>
-                </ListItemIcon>
-                <ListItemText primary='Staff'/>
-            </ListItem>
-          </List>
+        <MainMenu/>
     </CustomDrawer>
     <Box sx ={{flexGrow: 1, padding: theme.spacing(3)}}>
       <DrawerHeader/>

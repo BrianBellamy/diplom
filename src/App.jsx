@@ -13,10 +13,12 @@ const darkTheme = createTheme({
 const LightTheme = createTheme()
 
 const App = () => {
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(localStorage.theme === 'dark')
 
   const toggleDark = () => {
+    localStorage.theme = !dark ? 'dark' : 'light' 
     setDark(!dark)
+    
   }
 
   return (
