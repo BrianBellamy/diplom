@@ -22,6 +22,7 @@ import Task from '../pages/Task';
 import Chat from '../pages/Chat';
 import Staff from '../pages/Staff';
 import MainMenu from './MainMenu';
+import ListMenu from './ListMenu';
 
 
 
@@ -144,7 +145,8 @@ const Layout = (props) => {
       <Route path="/staff" element={<Staff/>}/>
       </Routes>
         </Paper>
-      
+        
+        <List/>
     </Box>
     </Box>
   )
