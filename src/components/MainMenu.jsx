@@ -13,7 +13,7 @@ import StarBorder from '@mui/icons-material/StarBorder';
 
 const MainMenu = () => {
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
