@@ -1,9 +1,9 @@
 import { TextField, CssBaseline, Grid, Paper, Typography } from '@mui/material';
-import "./app.css"
+import * as React from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 
 
-const App = () => {
+const Register = () => {
   return (
     <div>
       <CssBaseline>
@@ -87,4 +87,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default Register;

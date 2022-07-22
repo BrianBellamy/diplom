@@ -24,7 +24,7 @@ const MainMenu = () => {
     <List>
             <ListItem button 
             onClick={handleClick}
-                to = "/"
+                to = "/Task"
                 component = {NavLink}
             >
                 <ListItemIcon>

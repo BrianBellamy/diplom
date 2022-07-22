@@ -1,28 +1,25 @@
-import {Paper, AppBar, Toolbar, IconButton, Typography, Drawer, Divider, ListItem, List, ListItemText, ListItemIcon, Collapse, ListItemButton, } from '@mui/material'
+import {Paper, Toolbar, IconButton, Typography, Divider, List, } from '@mui/material'
 import React, {useState} from 'react'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import HomeIcon from '@mui/icons-material/Home';
 import AddIcon from '@mui/icons-material/Add';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
-
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Route, Routes } from 'react-router-dom'
 import { DrawerHeader, CustomAppBar, CustomDrawer } from './layout/styled';
 
+import Home from '../pages/Home';
 import Task from '../pages/Task';
 import Chat from '../pages/Chat';
 import Staff from '../pages/Staff';
 import MainMenu from './MainMenu';
-import ListMenu from './ListMenu';
+import PersonalModal from './PersonalModal';
+import { NavLink } from 'react-router-dom';
+import TaskModal from './TaskModal';
 
 
 
@@ -65,7 +62,9 @@ const Layout = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <IconButton
+          <IconButton button
+            to = "/"
+            component = {NavLink}
             size="large"
             edge="start"
             color="inherit"
@@ -77,26 +76,14 @@ const Layout = (props) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="home"
-            sx={{ mr: 2 }}
-          >
-            <AddIcon />
-          </IconButton>
+            <TaskModal/>
           <Box sx={{
             alignItems: 'center',
             display: 'flex',
             flexDirection: 'row',
             mr: 3
           }}>
-          <Tooltip title="Open settings">
-              <IconButton>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+          <PersonalModal/>
             <Box sx={{
                   mr: 2,
                   ml: 1,
@@ -140,7 +127,8 @@ const Layout = (props) => {
         padding: theme.spacing(3)
       }}>
         <Routes>
-      <Route path="/" element={<Task/>}/>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/task" element={<Task/>}/>
       <Route path="/chat" element={<Chat/>}/>
       <Route path="/staff" element={<Staff/>}/>
       </Routes>
