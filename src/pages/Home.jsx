@@ -1,6 +1,7 @@
 import { Box, TextField, Button, Stack } from '@mui/material'
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
+import '../app.css'
 
 const Home = () => {
   return (

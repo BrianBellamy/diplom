@@ -1,5 +1,6 @@
 import {CssBaseline, createTheme, ThemeProvider,  } from '@mui/material';
 import { useState } from 'react';
+import './app.css'
 
 import Header from './components/Layout.jsx';
 

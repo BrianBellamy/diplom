@@ -3,6 +3,7 @@ import Modal from '@mui/material/Modal';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, TextField, Button, Stack, IconButton, Tooltip} from '@mui/material'
+import '../app.css'
 
 
 
@@ -29,16 +30,16 @@ const TaskModal = () => {
 
   return (
     <div>
-
-      <Button size='small' onClick={handleOpen}>
       <Tooltip title="Add Task">
-        <IconButton sx={{
-            color: '#ffff',
-        }}>
+        <IconButton onClick={handleOpen}
+size="large"
+edge="start"
+color="inherit"
+aria-label="menu"
+sx={{ mr: 2 }}>
         <AddIcon/>
         </IconButton>
         </Tooltip>
-            </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -55,6 +56,7 @@ const TaskModal = () => {
           variant="filled"
         />
 <Box sx={{
+  width: '100%',
   display:'flex',
   justifyContent: 'space-between', 
   mt: 4,

@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Tooltip, IconButton, Avatar,} from '@mui/material';
+import '../app.css'
 
 const style = {
   display: 'flex', 
@@ -28,13 +29,20 @@ const PersonalModal = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>
         <Tooltip title="Open settings">
-              <IconButton>
+              <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+               onClick={handleOpen}>
+              
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+               
               </IconButton>
-            </Tooltip>
-            </Button>
+              </Tooltip>
+            
       <Modal
         open={open}
         onClose={handleClose}
