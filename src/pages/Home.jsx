@@ -1,9 +1,43 @@
-import { Box, TextField, Button, Stack } from '@mui/material'
-import React from 'react'
+import { Box, TextField, Button} from '@mui/material'
+import React, {useState} from 'react'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../app.css'
 
 const Home = () => {
+
+const [todos, setTodos] = useState([
+  {
+    title: 'Learn HTML/CSS',
+    complete: true
+  },
+  {
+    title: 'Learn JS',
+    complete: true
+  },
+  {
+    title: 'Do fc diplom',
+    complete: true
+  },
+]) 
+
+const addTodo = () =>{
+  const tmpArr = todos
+  tmpArr.push({
+    title: newTodo,
+    complete: true
+  })
+  setTodos(tmpArr)
+  setNewTodo('')
+}
+
+
+const deleteTodo = (index) =>{}
+const toggleTodo = (index) =>{}
+
+const [newTodo, setNewTodo] = useState("")
+
+
   return (
     <Box>
    <TextField sx={{
@@ -14,40 +48,39 @@ const Home = () => {
           multiline
           rows={4}
           variant="filled"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
         />
 <Box sx={{
   display:'flex',
   justifyContent: 'space-between', 
   mt: 4,
 }}>
-      <Stack direction='row' spacing={2}>
-      <Button
-          sx={{
-            textTransform: 'none'
-          }}
-           variant="contained" size='small'>For Tooday</Button>
-           <Button
-          sx={{
-            textTransform: 'none'
-          }}
-           variant="contained" size='small'>For Tomorrow</Button>
-      </Stack>
-
-    <Stack direction='row' spacing={2}>
-
         <Button sx={{
           textTransform: 'none'
-        }} size='small' variant="outlined" startIcon={<DeleteIcon />}>
-        Delete
+        }} size='small' 
+        disabled={!newTodo}
+        variant="outlined" 
+        startIcon={<AddCircleOutlineIcon />}
+        onClick={addTodo}
+        >
+        Add Task
       </Button>
-      <Button sx={{
-        textTransform: 'none'
-      }} size='small' variant="outlined" startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
-          </Stack>
+        </Box>
+        <Box sx={{
+          mt:2
+        }}>
+        {todos.length > 0 && 
+        todos.map((todo, index) => {
+          return(
+            <div key={index}>
+              {todo.title}
+            </div>
+          )
+        })}
         </Box>
     </Box>
+    
   )
 }
 
