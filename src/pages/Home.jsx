@@ -1,8 +1,9 @@
-import { Box, TextField, Button} from '@mui/material'
+import { Box, TextField, Button, Typography, List, ListItem, ListItemText, IconButton} from '@mui/material'
 import React, {useState} from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../app.css'
+import { bgcolor } from '@mui/system';
 
 const Home = () => {
 
@@ -17,7 +18,7 @@ const [todos, setTodos] = useState([
   },
   {
     title: 'Do fc diplom',
-    complete: true
+    complete: false
   },
 ]) 
 
@@ -27,12 +28,16 @@ const addTodo = () =>{
     title: newTodo,
     complete: true
   })
-  setTodos(tmpArr)
+  setTodos([...tmpArr])
   setNewTodo('')
 }
 
 
-const deleteTodo = (index) =>{}
+const deleteTodo = (index) =>{
+  const tmpArr = todos
+  tmpArr.splice(index, 1)
+  setTodos([...tmpArr])
+}
 const toggleTodo = (index) =>{}
 
 const [newTodo, setNewTodo] = useState("")
@@ -40,7 +45,11 @@ const [newTodo, setNewTodo] = useState("")
 
   return (
     <Box>
-   <TextField sx={{
+        <Box sx={{
+    boxShadow: '2',
+    padding: 3
+   }}> 
+        <TextField sx={{
     width: '100%',
    }}
           id="filled-multiline-static"
@@ -66,20 +75,33 @@ const [newTodo, setNewTodo] = useState("")
         >
         Add Task
       </Button>
-        </Box>
-        <Box sx={{
-          mt:2
-        }}>
-        {todos.length > 0 && 
-        todos.map((todo, index) => {
-          return(
-            <div key={index}>
-              {todo.title}
-            </div>
-          )
-        })}
-        </Box>
+        
+      </Box>
     </Box>
+    
+    <List sx={{
+      mt:2,
+      boxShadow: '2',
+    }}>
+    {todos.length > 0 && 
+    todos.map((todo, index) => {
+      return(
+        <ListItem key={index}
+        secondaryAction={
+          <IconButton onClick = {() => deleteTodo(index)}>
+            <DeleteIcon/>
+          </IconButton>
+        }>
+          <ListItemText primary={todo.title}
+          secondary={todo.complete ? 'complete': 'incomplete'}>
+          
+          </ListItemText>
+        </ListItem>
+      )
+    })}
+      </List>
+    </Box>
+    
     
   )
 }

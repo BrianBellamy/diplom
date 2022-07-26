@@ -8,7 +8,7 @@ const Task = () => {
   return (
     <Box>
         <Typography variant='p'>
-        Lorem ipsum dolor sit amet. Qui nihil ipsa quo error explicabo vel totam quisquam ut saepe nobis est molestias magni et consequuntur molestiae! Et autem fugit ea galisum deserunt et totam suscipit est voluptates labore aut voluptatem provident qui voluptatibus velit qui soluta modi. Ea omnis atque est maiores ipsa aut ipsam fuga quo aliquam voluptatem id animi vitae. Ut earum autem ea tenetur ratione sit expedita voluptatem.
+        Lorem ipsum dolor sit amet. Qui nihil ipsa quo error explicabo vel totam quisquam ut saepe nobis est molestias magni et consequuntur molestiae! 
     </Typography>
 
     <FormGroup sx={{
