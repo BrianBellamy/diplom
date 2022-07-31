@@ -1,13 +1,9 @@
 import React from 'react'
-import {ListItem, List, ListItemText, ListItemIcon, ListItemButton,} from '@mui/material'
-import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
+import {ListItem, List, ListItemText, ListItemIcon,} from '@mui/material'
 import ChatIcon from '@mui/icons-material/Chat';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import { NavLink } from 'react-router-dom';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import Collapse from '@mui/material/Collapse';
-import StarBorder from '@mui/icons-material/StarBorder';
+import HomeIcon from '@mui/icons-material/Home';
 
 
 
@@ -24,33 +20,14 @@ const MainMenu = () => {
     <List>
             <ListItem button 
             onClick={handleClick}
-                to = "/Task"
+                to = "/"
                 component = {NavLink}
             >
                 <ListItemIcon>
-                  <FeaturedPlayListIcon/>
+                  <HomeIcon/>
                 </ListItemIcon>
-                <ListItemText primary='Tasks'/>
-                {open ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText primary='Home'/>
                 </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
-        </List>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
-        </List>
-      </Collapse>
             <ListItem button
             to = "/chat"
             component = {NavLink}>

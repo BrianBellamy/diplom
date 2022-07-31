@@ -1,12 +1,10 @@
-import { Box, TextField, Button, List, ListItem, ListItemText, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography} from '@mui/material'
+import { Box, Divider, TextField, Button, List, ListItem, ListItemText, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography} from '@mui/material'
 import React, {useState} from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../app.css'
-import Checkbox from '@mui/material/Checkbox';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import { bgcolor } from '@mui/system';
 
 const Home = () => {
 
@@ -104,12 +102,14 @@ const [indexToDelete, setIndexToDelete]= useState(-1)
     </Box>
     
     <List sx={{
+      pb: 0,
       mt:2,
       boxShadow: '2',
     }}>
     {todos.length > 0 &&
     todos.map((todo, index) => {
       return(
+        <React.Fragment>
         <ListItem key={index}
         secondaryAction={
           <React.Fragment>
@@ -128,10 +128,18 @@ const [indexToDelete, setIndexToDelete]= useState(-1)
           </React.Fragment>
         }>
           <ListItemText primary={todo.title}
-          secondary={todo.complete ? 'complete': 'incomplete'}>
-          
+          secondary={todo.complete ? 'complete': 'coming'}
+          sx={{
+              color: todo.complete ? 'gray' : 'inherit',
+              textDecoration: todo.complete ? 'line-through' : 'none' 
+          }}
+          >
           </ListItemText>
+          
         </ListItem>
+        <Divider/>
+        </React.Fragment>
+        
       )
     })}
     {todos.length === 0 && (

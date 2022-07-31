@@ -4,7 +4,6 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
-import HomeIcon from '@mui/icons-material/Home';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useTheme } from '@emotion/react';
@@ -19,10 +18,6 @@ import MainMenu from './MainMenu';
 import PersonalModal from './PersonalModal';
 import { NavLink } from 'react-router-dom';
 import TaskModal from './TaskModal';
-
-
-
-
 
 
 
@@ -61,34 +56,20 @@ const Layout = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <IconButton button
-            to = "/"
-            component = {NavLink}
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="home"
-            sx={{ mr: 2 }}
-          >
-            <HomeIcon />
-          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            TodoShka
           </Typography>
-            <TaskModal/>
+            {/* <TaskModal/> */}
           <Box sx={{
             alignItems: 'center',
             display: 'flex',
             flexDirection: 'row',
-            mr: 3
+            mr: 2
           }}>
           <PersonalModal/>
             <Box sx={{
                   mr: 2,
-                  ml: 1,
-                  
-                  alignItems: 'start'
-
+                  alignItems: 'center'
                 }}>
                   <Typography>
                   Cameron Williamson
@@ -102,9 +83,9 @@ const Layout = (props) => {
               </Box>
         <IconButton 
         onClick={toggleDark} 
-        color={dark ? 'primary' : 'inherit'} 
+        color='inherit'
         sx={{
-            bgcolor: dark ? 'paper' : 'primary.light'
+            bgcolor: dark ? '#424242' : 'primary.light'
         }}
         >
             {dark ? <LightModeIcon/> : <DarkModeIcon/>}
